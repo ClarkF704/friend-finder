@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Make a friend!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Meet Someone !</h1>
+                <br>
+                    <form>
+                            <div class="form-group">
+                              <label for="exampleFormControlInput1">What is your name ?</label>
+                              <input type="name" class="form-control" id="nameInput">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleFormControlSelect1">I love waking up and regreeting what I did the night before!</label>
+                              <select class="form-control" id="q1">
+                                <option>1 (Not at all agree !)</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5 (I love this !)</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="exampleFormControlSelect1">I love putting people in their places</label>
+                                    <select class="form-control" id="q2">
+                                      <option>1 (Not at all agree !)</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5 (I love this !)</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="exampleFormControlSelect1">I'm a dog person !</label>
+                                    <select class="form-control" id="q3">
+                                      <option>1 (Not at all agree !)</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5 (I love this !)</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="exampleFormControlSelect1">I'm a cat person !</label>
+                                    <select class="form-control" id="q4">
+                                      <option>1 (Not at all agree !)</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5 (I love this !)</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                    <label for="exampleFormControlSelect1">I love indian food !</label>
+                                    <select class="form-control" id="q5">
+                                      <option>1 (Not at all agree !)</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5 (I love this !)</option>
+                                    </select>
+                            </div>
+                          </form>
+                          <button id="submitBtn" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+        <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var name = $('#nameInput').val();
+        var QuestionOne = $("#q1").val();
+        var QuestionTwo = $("#q2").val();
+        var QuestionThree = $("#q3").val();
+        var QuestionFour = $("#q4").val();
+        var QuestionFive = $("#q5").val();
+        $("#submitBtn").on("click", function(){
+            if(name === ""){
+                alert("This is not correct. Need to say name");
+            }
+
+            var userSubmit = [];
+
+            userSubmit.push(name,QuestionOne,QuestionTwo,QuestionThree,QuestionFour,QuestionFive);
+
+            
+
+            $.post("/api/friends", userSubmit).then(function(data, err){
+            if (err) throw err
+            console.log(data);
+            //push inputs into data. Need to push to friends.js to store data.
+            userSubmit.push(data)
+        }).then(function(res){
+        });
+        });
+
+        
+    </script>
+    
+</body>
+</html>
