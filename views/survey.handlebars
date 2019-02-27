@@ -97,12 +97,16 @@
 
       // post information to back end
 
-      $.post("/api/friends", user, function(data){
-        console.log(data);
-        $('#MatchName').text(data.name)
+      $.post({
+        url: "/api/friends",
+        data: user,
+        traditional: true,
+        success: function(data){
+          console.log(data);
+          $('#MatchName').text(data.userName)
+        },
+      });
 
-        console.log(user);
-      })
       //Clears users inputs
       $('#nameInput').val("");
       $('#q1').val("1");

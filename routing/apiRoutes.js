@@ -1,5 +1,4 @@
-var friends = [];
-var group = require("../app/data/friends.json")
+var friends = require("../app/data/friends.json");
 
 module.exports = function (app) {
     //
@@ -8,7 +7,9 @@ module.exports = function (app) {
     });
     // When the user submits
     app.post('/api/friends', function (req, res) {
-        var answers = req.body.questionAnswers;
+        var answers = req.body.questionAnswers; //question answers doesnt exist
+
+        console.log(answers);
 
         var userScores = [];
         var bestMatch = 0;
@@ -17,7 +18,7 @@ module.exports = function (app) {
             var scoreDifference = 0;
 
             for (L = 0; L < answers.length; L++) {
-                scoreDifference += (Math.abs(parseInt(friends[i].scores[L] - parseInt(answers))));
+                scoreDifference += (Math.abs(parseInt(friends[i].questionAnswers[L] - parseInt(answers))));
             }
             userScores.push(scoreDifference);
 
@@ -30,7 +31,5 @@ module.exports = function (app) {
         var match = friends[bestMatch];
         res.json(match);
         friends.push(req.body);
-        group.push(friends);
-        // console.log(group);
     });
 }
